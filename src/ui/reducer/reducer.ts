@@ -1,18 +1,18 @@
 import { TAction, TState } from '../../types/types';
-import { COMMENT, DATE, FLOOR, MEETINGROOM, TOWER } from './constants';
+import { ActionPoints } from './enums';
 
 export const reducer = (state: TState, action: TAction) => {
 	switch (action?.type) {
-		case TOWER:
-			return { ...state, tower: action.payload.tower };
-		case FLOOR:
-			return { ...state, floor: action.payload.floor };
-		case MEETINGROOM:
-			return { ...state, meetingroom: action.payload.meetingroom };
-		case DATE:
-			return { ...state, date: action.payload.date };
-		case COMMENT:
-			return { ...state, comment: action.payload.comment };
+		case ActionPoints.TOWER:
+			return { ...state, tower: action.payload };
+		case ActionPoints.MEETINGROOM:
+			return { ...state, floor: action.payload };
+		case ActionPoints.FLOOR:
+			return { ...state, meetingroom: action.payload };
+		case ActionPoints.DATE:
+			return { ...state, date: action.payload };
+		case ActionPoints.COMMENT:
+			return { ...state, comment: action.payload };
 		default:
 			return state;
 	}

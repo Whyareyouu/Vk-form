@@ -1,0 +1,8 @@
+.DatePicker {
+	display: flex;
+	gap: 10px;
+}
+.DatePicker__element {
+	cursor: pointer;
+	padding: 5px;
+}

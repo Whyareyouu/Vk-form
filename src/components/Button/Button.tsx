@@ -11,11 +11,15 @@ interface ButtonProps
 
 export const Button = ({
 	type,
+	onClick,
 	variant = 'green',
 	children,
 }: ButtonProps): JSX.Element => {
 	return (
-		<button type={type} className={`${variant === 'green' ? 'green' : 'red'}`}>
+		<button
+			type={type}
+			onClick={onClick}
+			className={`${variant === 'green' ? 'green' : 'red'}`}>
 			{children}
 		</button>
 	);
