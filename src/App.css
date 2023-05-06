@@ -1,18 +1,24 @@
-.Form {
+.form {
 	max-width: 422px;
 	margin: 30px auto 0;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
+.form__title {
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 35px;
+}
 .office__body {
 	display: grid;
 	grid-template-columns: 400px 1fr;
+	grid-template-rows: auto minmax(300px, 400px);
 	grid-template-areas:
 		'chosetime chosetime'
 		'calendar meetingrooms';
-	justify-items: center;
-	align-items: center;
+	justify-items: start;
+	align-items: start;
 }
 .office__body-chosetime {
 	grid-area: chosetime;
@@ -24,4 +30,13 @@
 }
 .office__body-meetingrooms {
 	grid-area: meetingrooms;
+}
+.button__container {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+.comment {
+	min-height: 200px;
+	height: 100%;
 }

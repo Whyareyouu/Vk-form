@@ -6,20 +6,20 @@ interface ButtonProps
 		ButtonHTMLAttributes<HTMLButtonElement>,
 		HTMLButtonElement
 	> {
-	variant?: 'green' | 'red';
+	variant?: 'primary' | 'error';
 }
 
 export const Button = ({
 	type,
 	onClick,
-	variant = 'green',
+	variant = 'primary',
 	children,
 }: ButtonProps): JSX.Element => {
 	return (
 		<button
 			type={type}
 			onClick={onClick}
-			className={`${variant === 'green' ? 'green' : 'red'}`}>
+			className={`${variant === 'primary' ? 'primary' : 'error'}`}>
 			{children}
 		</button>
 	);

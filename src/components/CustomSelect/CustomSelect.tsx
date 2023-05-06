@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import Select from 'react-select';
 import { TOption } from '../../types/types';
@@ -8,7 +7,7 @@ interface CustomSelectProps
 		HTMLDivElement
 	> {
 	options?: TOption[];
-	onChange: () => void;
+	onChange: any;
 }
 export const CustomSelect = ({
 	options,

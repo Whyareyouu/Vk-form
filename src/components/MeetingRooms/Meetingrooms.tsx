@@ -1,27 +1,22 @@
 import * as React from 'react';
-import meetingroom_icon from './meetingroom.svg';
 import './Meetingrooms.css';
+import { Meetingroom } from '../Meetingroom/meetingroom';
 interface MeetingroomsProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,
 		HTMLDivElement
 	> {}
-export const Meetingrooms = ({ className, ...props }: MeetingroomsProps) => {
+const Meetingrooms = ({ className, ...props }: MeetingroomsProps) => {
+	const rooms = new Array(10).fill(<Meetingroom />);
 	return (
 		<div className={`${className}`}>
-			<h1 className='meetingrooms__title'>Выберите переговорку</h1>
+			<h2 className='meetingrooms__title'>Выберите переговорную</h2>
 			<div className='meetingrooms'>
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
-				<img src={meetingroom_icon} alt='' />
+				{rooms.map((room, index) => (
+					<React.Fragment key={index}>{room}</React.Fragment>
+				))}
 			</div>
 		</div>
 	);
 };
+export default React.memo(Meetingrooms);

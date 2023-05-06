@@ -6,12 +6,17 @@ interface ChoseTimeProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,
 		HTMLDivElement
-	> {}
-export const ChoseTime = ({ className, ...props }: ChoseTimeProps) => {
-	const [active, setActive] = React.useState<TOption | null>(null);
-	const startTime = 9;
-	const endTime = 22;
-	const startTimes = React.useMemo(
+	> {
+	startTime: number;
+	endTime: number;
+}
+export const ChoseTime = ({
+	className,
+	startTime,
+	endTime,
+	...props
+}: ChoseTimeProps) => {
+	const times = React.useMemo(
 		() =>
 			Array(endTime - startTime)
 				.fill('')
@@ -21,19 +26,11 @@ export const ChoseTime = ({ className, ...props }: ChoseTimeProps) => {
 				})),
 		[startTime, endTime]
 	);
-	if (active) {
-		console.log(startTimes.indexOf(active));
-		const endTimes = startTimes.slice(startTimes.indexOf(active) + 1);
-		console.log(endTimes);
-	}
 	return (
 		<div className={`DatePicker ${className}`}>
-			<CustomSelect
-				options={startTimes}
-				placeholder='9:00'
-				onChange={setActive}
-			/>
-			<CustomSelect options={startTimes} placeholder='21:00' />
+			<CustomSelect options={times} placeholder='9:00' />
+			<span>—</span>
+			<CustomSelect options={times} placeholder='21:00' />
 		</div>
 	);
 };

@@ -7,9 +7,10 @@ import { CustomSelect } from './components/CustomSelect/CustomSelect';
 import { floors, towers } from './helpers/options';
 import Calendar from './components/Calendar/Calendar';
 import ChoseTime from './components/ChoseTime/ChoseTime';
-import { Meetingrooms } from './components/MeetingRooms/Meetingrooms';
 import { useFormDispatch } from './hooks/useFormDispatch';
 import { useFormState } from './hooks/useFormState';
+import { Textarea } from './components/Textarea/Textarea';
+import Meetingrooms from './components/MeetingRooms/Meetingrooms';
 
 function App() {
 	const [active, setActive] = useState<boolean>(false);
@@ -25,7 +26,8 @@ function App() {
 		console.log(state);
 	};
 	return (
-		<form className='Form' onSubmit={onSubmit}>
+		<form className='form' onSubmit={onSubmit}>
+			<h1 className='form__title'>Форма бронирования переговорной</h1>
 			<CustomSelect
 				options={towers}
 				onChange={handleChangeTower}
@@ -37,19 +39,23 @@ function App() {
 				placeholder='Выберите этаж'
 			/>
 			<Button type='button' onClick={() => setActive(true)}>
-				Забронировать переговорку
+				Забронировать переговорную
 			</Button>
 			<Modal active={active} setActive={setActive}>
 				<div className='office__body'>
-					<ChoseTime className='office__body-chosetime' />
+					<ChoseTime
+						className='office__body-chosetime'
+						startTime={9}
+						endTime={24}
+					/>
 					<Calendar className='office__body-calendar' />
 					<Meetingrooms className='office__body-meetingrooms' />
 				</div>
 			</Modal>
-			<textarea name='' id=''></textarea>
-			<div>
-				<Button variant='green'>Отправить</Button>
-				<Button type='button' variant='red'>
+			<Textarea className='comment' placeholder='Комментарий' />
+			<div className='button__container'>
+				<Button variant='primary'>Отправить</Button>
+				<Button type='button' variant='error'>
 					Очистить
 				</Button>
 			</div>
