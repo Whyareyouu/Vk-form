@@ -1,0 +1,14 @@
+.meetingrooms {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 40px;
+	justify-content: center;
+	align-items: center;
+}
+.meetingrooms__title {
+	text-align: center;
+}
+img {
+	cursor: pointer;
+}

@@ -1,57 +1,51 @@
-import { useReducer, useState } from 'react';
-import { reducer } from './ui/reducer/reducer';
-import { TState } from './types/types';
+import { useState } from 'react';
+import { TOption } from './types/types';
 import './App.css';
 import { Button, Modal } from './components';
 import { ActionPoints } from './ui/reducer/enums';
-import DatePicker from './components/DatePicker/DatePicker';
-import Select from 'react-select';
 import { CustomSelect } from './components/CustomSelect/CustomSelect';
-import { towers } from './helpers/options';
-const initialState: TState = {
-	tower: '',
-	floor: '',
-	meetingroom: '',
-	date: '',
-	comment: '',
-};
+import { floors, towers } from './helpers/options';
+import Calendar from './components/Calendar/Calendar';
+import ChoseTime from './components/ChoseTime/ChoseTime';
+import { Meetingrooms } from './components/MeetingRooms/Meetingrooms';
+import { useFormDispatch } from './hooks/useFormDispatch';
+import { useFormState } from './hooks/useFormState';
 
 function App() {
-	const [state, dispatch] = useReducer(reducer, initialState);
 	const [active, setActive] = useState<boolean>(false);
+	const dispatch = useFormDispatch();
+	const state = useFormState();
+	const handleChangeTower = (selectedOption: TOption) => {
+		dispatch({ type: ActionPoints.TOWER, payload: selectedOption.value });
+	};
+	const handleChangeFloor = (selectedOption: TOption) => {
+		dispatch({ type: ActionPoints.FLOOR, payload: selectedOption.value });
+	};
 	const onSubmit = () => {
 		console.log(state);
 	};
 	return (
 		<form className='Form' onSubmit={onSubmit}>
-			<CustomSelect options={towers} onChange={() => console.log()} />
-			<select
-				name=''
-				id=''
-				value={state.tower}
-				onChange={(e) =>
-					dispatch({ type: ActionPoints.TOWER, payload: e.target.value })
-				}>
-				<option value='A'>A</option>
-				<option value='B'>B</option>
-			</select>
-			<select name='' id=''>
-				<option value=''>3</option>
-				<option value=''>4</option>
-			</select>
+			<CustomSelect
+				options={towers}
+				onChange={handleChangeTower}
+				placeholder='Выберите башню'
+			/>
+			<CustomSelect
+				options={floors}
+				onChange={handleChangeFloor}
+				placeholder='Выберите этаж'
+			/>
 			<Button type='button' onClick={() => setActive(true)}>
-				Выбрать дату и время
+				Забронировать переговорку
 			</Button>
 			<Modal active={active} setActive={setActive}>
-				<DatePicker />
+				<div className='office__body'>
+					<ChoseTime className='office__body-chosetime' />
+					<Calendar className='office__body-calendar' />
+					<Meetingrooms className='office__body-meetingrooms' />
+				</div>
 			</Modal>
-			<input
-				type='date'
-				value={state.date}
-				onChange={(e) =>
-					dispatch({ type: ActionPoints.DATE, payload: e.target.value })
-				}
-			/>
 			<textarea name='' id=''></textarea>
 			<div>
 				<Button variant='green'>Отправить</Button>

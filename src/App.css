@@ -5,3 +5,23 @@
 	flex-direction: column;
 	gap: 20px;
 }
+.office__body {
+	display: grid;
+	grid-template-columns: 400px 1fr;
+	grid-template-areas:
+		'chosetime chosetime'
+		'calendar meetingrooms';
+	justify-items: center;
+	align-items: center;
+}
+.office__body-chosetime {
+	grid-area: chosetime;
+	align-self: end;
+	justify-self: end;
+}
+.office__body-calendar {
+	grid-area: calendar;
+}
+.office__body-meetingrooms {
+	grid-area: meetingrooms;
+}

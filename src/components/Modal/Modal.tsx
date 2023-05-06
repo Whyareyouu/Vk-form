@@ -13,10 +13,10 @@ export const Modal = ({
 }: ModalProps): JSX.Element => {
 	return (
 		<div
-			className={active ? 'modal active' : 'modal'}
+			className={active ? 'modal modal__active' : 'modal'}
 			onClick={() => setActive(false)}>
 			<div
-				className={active ? 'modal__content active' : 'modal__content'}
+				className={active ? 'modal__content modal__active' : 'modal__content'}
 				onClick={(e) => e.stopPropagation()}>
 				{children}
 			</div>

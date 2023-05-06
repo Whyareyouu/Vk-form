@@ -1,22 +1,19 @@
 // @flow
 import * as React from 'react';
 import Select from 'react-select';
-type option = {
-	value: string;
-	label: string;
-};
+import { TOption } from '../../types/types';
 interface CustomSelectProps
 	extends React.DetailedHTMLProps<
-		React.SelectHTMLAttributes<HTMLSelectElement>,
-		HTMLSelectElement
+		React.HTMLAttributes<HTMLDivElement>,
+		HTMLDivElement
 	> {
-	options?: option[];
+	options?: TOption[];
+	onChange: () => void;
 }
 export const CustomSelect = ({
 	options,
 	onChange,
 	placeholder,
-	value,
 	...props
 }: CustomSelectProps): JSX.Element => {
 	return (

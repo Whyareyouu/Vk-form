@@ -5,9 +5,9 @@ export const reducer = (state: TState, action: TAction) => {
 	switch (action?.type) {
 		case ActionPoints.TOWER:
 			return { ...state, tower: action.payload };
-		case ActionPoints.MEETINGROOM:
-			return { ...state, floor: action.payload };
 		case ActionPoints.FLOOR:
+			return { ...state, floor: action.payload };
+		case ActionPoints.MEETINGROOM:
 			return { ...state, meetingroom: action.payload };
 		case ActionPoints.DATE:
 			return { ...state, date: action.payload };

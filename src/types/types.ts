@@ -9,3 +9,7 @@ export type TState = {
 	date: string;
 	comment: string;
 };
+export type TOption = {
+	value: string;
+	label: string;
+};
