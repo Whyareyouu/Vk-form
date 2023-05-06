@@ -1,4 +1,4 @@
-export const weekdays = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+export const weekdays = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
 export const getDaysArray = (date: Date): Date[] => {
 	const monthStart: Date = new Date(date.getFullYear(), date.getMonth(), 1);
 	const monthEnd: Date = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -16,4 +16,10 @@ export const getDaysArray = (date: Date): Date[] => {
 	}
 
 	return daysArray;
+};
+export const formatDate = (date: Date): string => {
+	const day = date.getDate().toString().padStart(2, "0");
+	const month = (date.getMonth() + 1).toString().padStart(2, "0");
+	const year = date.getFullYear().toString();
+	return `${year}-${month}-${day}`;
 };

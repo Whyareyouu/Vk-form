@@ -1,5 +1,5 @@
-import React from 'react';
-import './Textarea.css';
+import React from "react";
+import "./Textarea.css";
 
 export interface TextAreaProps
 	extends React.DetailedHTMLProps<
@@ -8,8 +8,15 @@ export interface TextAreaProps
 	> {}
 
 export const Textarea = ({
+	onChange,
 	className,
 	...props
 }: TextAreaProps): JSX.Element => {
-	return <textarea className={`textarea ${className}`} {...props} />;
+	return (
+		<textarea
+			className={`textarea ${className}`}
+			{...props}
+			onChange={onChange}
+		/>
+	);
 };
