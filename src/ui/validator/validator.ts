@@ -13,14 +13,6 @@ export const validator = (state: TState): TErrors => {
 	if (!state.meetingroom) {
 		errors.meetingroom = 'Выберите переговоную';
 	}
-
-	if (!state.date.startTime) {
-		errors.date = { ...errors.date, startTime: 'Выберите начальное время' };
-	}
-
-	if (!state.date.endTime) {
-		errors.date = { ...errors.date, endTime: 'Выберите конечное время' };
-	}
 	if (
 		+state.date.startTime.replace(':00', '') >=
 		+state.date.endTime.replace(':00', '')
@@ -29,6 +21,13 @@ export const validator = (state: TState): TErrors => {
 			...errors.date,
 			endTime: 'Конечное время не должно быть меньше начального',
 		};
+	}
+	if (!state.date.startTime) {
+		errors.date = { ...errors.date, startTime: 'Выберите начальное время' };
+	}
+
+	if (!state.date.endTime) {
+		errors.date = { ...errors.date, endTime: 'Выберите конечное время' };
 	}
 	if (!state.date.date) {
 		errors.date = { ...errors.date, date: 'Выберите дату' };

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import './Calendar.css';
-import { formatDate, getDaysArray, weekdays } from './helpers';
-import { useFormDispatch } from '../../hooks/useFormDispatch';
-import { ActionPoints } from '../../ui/reducer/enums';
+import React, { useState } from "react";
+import "./Calendar.css";
+import { formatDate, getDaysArray, weekdays } from "./helpers";
+import { useFormDispatch } from "../../hooks/useFormDispatch";
+import { ActionPoints } from "../../ui/reducer/enums";
+import { useFormState } from "../../hooks/useFormState";
 
 interface CalendarProps
 	extends React.DetailedHTMLProps<
@@ -14,6 +15,7 @@ interface CalendarProps
 
 const Calendar = ({ className, error, ...props }: CalendarProps) => {
 	const dispatch = useFormDispatch();
+	const state = useFormState();
 	const [currentDate, setCurrentDate] = useState<Date>(new Date());
 	const [activeDate, setActiveDate] = useState<string | null>(null);
 	const dateNow = new Date();
@@ -42,36 +44,42 @@ const Calendar = ({ className, error, ...props }: CalendarProps) => {
 		setActiveDate(id);
 		dispatch({ type: ActionPoints.DATE, payload: formatDate(day) });
 	};
+	if (
+		activeDate !== null &&
+		state.date.date !== new Date(activeDate).toISOString().substring(0, 10)
+	) {
+		setActiveDate(null);
+	}
 	return (
 		<div className={`${className}`}>
-			<div className='calendar'>
-				<div className='header'>
-					<div className='previous' onClick={prevMonth}>
-						{'<'}
+			<div className="calendar">
+				<div className="header">
+					<div className="previous" onClick={prevMonth}>
+						{"<"}
 					</div>
-					<div className='current-month'>
-						{currentDate.toLocaleString('ru', {
-							month: 'long',
-							year: 'numeric',
+					<div className="current-month">
+						{currentDate.toLocaleString("ru", {
+							month: "long",
+							year: "numeric",
 						})}
 					</div>
-					<div className='next' onClick={nextMonth}>
-						{'>'}
+					<div className="next" onClick={nextMonth}>
+						{">"}
 					</div>
 				</div>
-				<div className='weekdays'>
+				<div className="weekdays">
 					{weekdays.map((weekday) => (
-						<div className='weekday' key={weekday}>
+						<div className="weekday" key={weekday}>
 							{weekday}
 						</div>
 					))}
 				</div>
-				<div className='days'>
+				<div className="days">
 					{days.map((day) => (
 						<div
 							className={`day ${
-								day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''
-							}${activeDate === day.toISOString() ? 'active' : ''}`}
+								day.getMonth() !== currentDate.getMonth() ? "other-month" : ""
+							}${activeDate === day.toISOString() ? "active" : ""}`}
 							key={day.toISOString()}
 							onClick={() => handleDateClick(day, day.toISOString())}>
 							{day.getDate()}
@@ -79,7 +87,7 @@ const Calendar = ({ className, error, ...props }: CalendarProps) => {
 					))}
 				</div>
 			</div>
-			{error && <span className='error'>{error}</span>}
+			{error && <span className="error">{error}</span>}
 		</div>
 	);
 };
