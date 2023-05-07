@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import "./Calendar.css";
-import { formatDate, getDaysArray, weekdays } from "./helpers";
-import { useFormDispatch } from "../../hooks/useFormDispatch";
-import { ActionPoints } from "../../ui/reducer/enums";
+import React, { useState } from 'react';
+import './Calendar.css';
+import { formatDate, getDaysArray, weekdays } from './helpers';
+import { useFormDispatch } from '../../hooks/useFormDispatch';
+import { ActionPoints } from '../../ui/reducer/enums';
 
 interface CalendarProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,
 		HTMLDivElement
-	> {}
+	> {
+	error?: string;
+}
 
-const Calendar = ({ className, ...props }: CalendarProps) => {
+const Calendar = ({ className, error, ...props }: CalendarProps) => {
 	const dispatch = useFormDispatch();
 	const [currentDate, setCurrentDate] = useState<Date>(new Date());
 	const [activeDate, setActiveDate] = useState<string | null>(null);
@@ -42,36 +44,37 @@ const Calendar = ({ className, ...props }: CalendarProps) => {
 	};
 	return (
 		<div className={`calendar ${className}`}>
-			<div className="header">
-				<div className="previous" onClick={prevMonth}>
-					{"<"}
+			<div className='header'>
+				<div className='previous' onClick={prevMonth}>
+					{'<'}
 				</div>
-				<div className="current-month">
-					{currentDate.toLocaleString("ru", { month: "long", year: "numeric" })}
+				<div className='current-month'>
+					{currentDate.toLocaleString('ru', { month: 'long', year: 'numeric' })}
 				</div>
-				<div className="next" onClick={nextMonth}>
-					{">"}
+				<div className='next' onClick={nextMonth}>
+					{'>'}
 				</div>
 			</div>
-			<div className="weekdays">
+			<div className='weekdays'>
 				{weekdays.map((weekday) => (
-					<div className="weekday" key={weekday}>
+					<div className='weekday' key={weekday}>
 						{weekday}
 					</div>
 				))}
 			</div>
-			<div className="days">
+			<div className='days'>
 				{days.map((day) => (
 					<div
 						className={`day ${
-							day.getMonth() !== currentDate.getMonth() ? "other-month" : ""
-						}${activeDate === day.toISOString() ? "active" : ""}`}
+							day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''
+						}${activeDate === day.toISOString() ? 'active' : ''}`}
 						key={day.toISOString()}
 						onClick={() => handleDateClick(day, day.toISOString())}>
 						{day.getDate()}
 					</div>
 				))}
 			</div>
+			{error && <span>{error}</span>}
 		</div>
 	);
 };

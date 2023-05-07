@@ -17,3 +17,15 @@ export type TOption = {
 	value: string;
 	label: string;
 };
+
+export type TErrors = {
+	tower?: string;
+	floor?: string;
+	meetingroom?: string;
+	date?: {
+		startTime?: string;
+		endTime?: string;
+		date?: string;
+	};
+	comment?: string;
+};

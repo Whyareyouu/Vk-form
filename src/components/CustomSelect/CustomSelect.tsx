@@ -8,14 +8,19 @@ interface CustomSelectProps
 	> {
 	options?: TOption[];
 	onChange: any;
+	error?: string;
 }
 export const CustomSelect = ({
 	options,
 	onChange,
 	placeholder,
+	error,
 	...props
 }: CustomSelectProps): JSX.Element => {
 	return (
-		<Select options={options} placeholder={placeholder} onChange={onChange} />
+		<>
+			<Select options={options} placeholder={placeholder} onChange={onChange} />
+			{error && <span>{error}</span>}
+		</>
 	);
 };
