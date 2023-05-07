@@ -1,3 +1,7 @@
+.Textarea__wrapper {
+	display: flex;
+	flex-direction: column;
+}
 .textarea {
 	resize: none;
 	padding: 7px 15px;

@@ -1,6 +1,6 @@
-import React from "react";
-import { TAction, TState } from "../../types/types";
-import { reducer } from "../reducer/reducer";
+import React from 'react';
+import { TAction, TState } from '../../types/types';
+import { reducer } from '../reducer/reducer';
 
 export const FormStateContext = React.createContext<TState | undefined>(
 	undefined
@@ -12,19 +12,19 @@ export const FormDispatchContext = React.createContext<
 type FormProviderProps = {
 	children: React.ReactNode;
 };
+export const initialState: TState = {
+	tower: '',
+	floor: '',
+	meetingroom: '',
+	date: {
+		startTime: '',
+		endTime: '',
+		date: '',
+	},
+	comment: '',
+};
 
 function FormProvider({ children }: FormProviderProps): JSX.Element {
-	const initialState: TState = {
-		tower: "",
-		floor: "",
-		meetingroom: "",
-		date: {
-			startTime: "",
-			endTime: "",
-			date: "",
-		},
-		comment: "",
-	};
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<FormStateContext.Provider value={state}>

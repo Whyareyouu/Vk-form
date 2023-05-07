@@ -10,19 +10,21 @@ export interface TextAreaProps
 }
 
 export const Textarea = ({
+	value,
 	onChange,
 	className,
 	error,
 	...props
 }: TextAreaProps): JSX.Element => {
 	return (
-		<>
+		<div className='Textarea__wrapper'>
 			<textarea
 				className={`textarea ${className}`}
 				{...props}
 				onChange={onChange}
+				value={value}
 			/>
-			{error && <span>{error}</span>}
-		</>
+			{error && <span className='error'>{error}</span>}
+		</div>
 	);
 };

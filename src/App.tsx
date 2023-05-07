@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TErrors, TOption } from './types/types';
 import './App.css';
 import { Button, Modal } from './components';
@@ -18,6 +18,9 @@ function App() {
 	const [errors, setErrors] = useState<TErrors | null>(null);
 	const dispatch = useFormDispatch();
 	const state = useFormState();
+	useEffect(() => {
+		setErrors(validator(state));
+	}, [state]);
 	const handleChangeTower = (selectedOption: TOption) => {
 		dispatch({ type: ActionPoints.TOWER, payload: selectedOption.value });
 	};
@@ -26,7 +29,10 @@ function App() {
 	};
 	const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setErrors(validator(state));
+		if (errors !== null && Object.keys(errors).length !== 0) {
+			return;
+		}
+		console.log(JSON.stringify(state));
 	};
 	return (
 		<form className='form' onSubmit={onSubmit}>
@@ -43,9 +49,17 @@ function App() {
 				placeholder='Выберите этаж'
 				error={errors?.floor}
 			/>
-			<Button type='button' onClick={() => setActive(true)}>
-				Забронировать переговорную
-			</Button>
+			<div className='book_meetingroom'>
+				<Button type='button' onClick={() => setActive(true)}>
+					Забронировать переговорную
+				</Button>
+				<span className='error'>
+					{errors?.date?.endTime ||
+						errors?.date?.startTime ||
+						errors?.date?.date ||
+						errors?.meetingroom}
+				</span>
+			</div>
 			<Modal active={active} setActive={setActive}>
 				<div className='office__body'>
 					<ChoseTime
@@ -71,10 +85,18 @@ function App() {
 					dispatch({ type: ActionPoints.COMMENT, payload: event?.target.value })
 				}
 				error={errors?.comment}
+				value={state.comment}
 			/>
 			<div className='button__container'>
-				<Button variant='primary'>Отправить</Button>
-				<Button type='button' variant='error'>
+				<Button
+					variant='primary'
+					disabled={errors !== null && Object.keys(errors).length !== 0}>
+					Отправить
+				</Button>
+				<Button
+					type='button'
+					variant='red'
+					onClick={() => dispatch({ type: ActionPoints.CLEAR })}>
 					Очистить
 				</Button>
 			</div>

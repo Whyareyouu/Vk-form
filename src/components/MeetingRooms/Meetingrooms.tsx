@@ -38,7 +38,7 @@ const Meetingrooms = ({ className, error, ...props }: MeetingroomsProps) => {
 					</div>
 				))}
 			</div>
-			{error && <span>{error}</span>}
+			{error && <span className='error'>{error}</span>}
 		</div>
 	);
 };

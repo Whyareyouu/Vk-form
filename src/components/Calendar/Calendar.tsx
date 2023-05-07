@@ -43,40 +43,45 @@ const Calendar = ({ className, error, ...props }: CalendarProps) => {
 		dispatch({ type: ActionPoints.DATE, payload: formatDate(day) });
 	};
 	return (
-		<div className={`calendar ${className}`}>
-			<div className='header'>
-				<div className='previous' onClick={prevMonth}>
-					{'<'}
-				</div>
-				<div className='current-month'>
-					{currentDate.toLocaleString('ru', { month: 'long', year: 'numeric' })}
-				</div>
-				<div className='next' onClick={nextMonth}>
-					{'>'}
-				</div>
-			</div>
-			<div className='weekdays'>
-				{weekdays.map((weekday) => (
-					<div className='weekday' key={weekday}>
-						{weekday}
+		<div className={`${className}`}>
+			<div className='calendar'>
+				<div className='header'>
+					<div className='previous' onClick={prevMonth}>
+						{'<'}
 					</div>
-				))}
-			</div>
-			<div className='days'>
-				{days.map((day) => (
-					<div
-						className={`day ${
-							day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''
-						}${activeDate === day.toISOString() ? 'active' : ''}`}
-						key={day.toISOString()}
-						onClick={() => handleDateClick(day, day.toISOString())}>
-						{day.getDate()}
+					<div className='current-month'>
+						{currentDate.toLocaleString('ru', {
+							month: 'long',
+							year: 'numeric',
+						})}
 					</div>
-				))}
+					<div className='next' onClick={nextMonth}>
+						{'>'}
+					</div>
+				</div>
+				<div className='weekdays'>
+					{weekdays.map((weekday) => (
+						<div className='weekday' key={weekday}>
+							{weekday}
+						</div>
+					))}
+				</div>
+				<div className='days'>
+					{days.map((day) => (
+						<div
+							className={`day ${
+								day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''
+							}${activeDate === day.toISOString() ? 'active' : ''}`}
+							key={day.toISOString()}
+							onClick={() => handleDateClick(day, day.toISOString())}>
+							{day.getDate()}
+						</div>
+					))}
+				</div>
 			</div>
-			{error && <span>{error}</span>}
+			{error && <span className='error'>{error}</span>}
 		</div>
 	);
 };
 
-export default Calendar;
+export default React.memo(Calendar);

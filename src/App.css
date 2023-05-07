@@ -10,6 +10,10 @@
 	font-size: 24px;
 	line-height: 35px;
 }
+.book_meetingroom {
+	display: flex;
+	flex-direction: column;
+}
 .office__body {
 	display: grid;
 	grid-template-columns: 400px 1fr;
@@ -39,4 +43,8 @@
 .comment {
 	min-height: 200px;
 	height: 100%;
+}
+.error {
+	font-size: 12px;
+	color: var(--red);
 }

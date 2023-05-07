@@ -3,23 +3,23 @@ import { TErrors, TState } from '../../types/types';
 export const validator = (state: TState): TErrors => {
 	let errors: TErrors = {};
 	if (!state.tower) {
-		errors.tower = 'Tower is required';
+		errors.tower = 'Выберите башню';
 	}
 
 	if (!state.floor) {
-		errors.floor = 'Floor is required';
+		errors.floor = 'Выберите этаж';
 	}
 
 	if (!state.meetingroom) {
-		errors.meetingroom = 'Meeting room is required';
+		errors.meetingroom = 'Выберите переговоную';
 	}
 
 	if (!state.date.startTime) {
-		errors.date = { ...errors.date, startTime: 'Start time is required' };
+		errors.date = { ...errors.date, startTime: 'Выберите начальное время' };
 	}
 
 	if (!state.date.endTime) {
-		errors.date = { ...errors.date, endTime: 'End time is required' };
+		errors.date = { ...errors.date, endTime: 'Выберите конечное время' };
 	}
 	if (
 		+state.date.startTime.replace(':00', '') >=
@@ -27,14 +27,14 @@ export const validator = (state: TState): TErrors => {
 	) {
 		errors.date = {
 			...errors.date,
-			endTime: 'Конечное время не может меньше начального',
+			endTime: 'Конечное время не должно быть меньше начального',
 		};
 	}
 	if (!state.date.date) {
-		errors.date = { ...errors.date, date: 'Date is required' };
+		errors.date = { ...errors.date, date: 'Выберите дату' };
 	}
 	if (!state.comment) {
-		errors.comment = 'Comment is required';
+		errors.comment = 'Оставьте комментарий';
 	}
 	return errors;
 };

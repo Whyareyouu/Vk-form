@@ -38,19 +38,21 @@ export const ChoseTime = ({
 		[startTime, endTime]
 	);
 	return (
-		<div className={`DatePicker ${className}`}>
-			<CustomSelect
-				options={times}
-				placeholder='9:00'
-				onChange={handleChangeStartTime}
-			/>
-			<span>—</span>
-			<CustomSelect
-				options={times}
-				placeholder='21:00'
-				onChange={handleChangeEndTime}
-			/>
-			{error && <span>{error}</span>}
+		<div className={`${className}`}>
+			<div className='DatePicker'>
+				<CustomSelect
+					options={times}
+					placeholder='9:00'
+					onChange={handleChangeStartTime}
+				/>
+				<span>—</span>
+				<CustomSelect
+					options={times}
+					placeholder='21:00'
+					onChange={handleChangeEndTime}
+				/>
+			</div>
+			{error && <span className='error'>{error}</span>}
 		</div>
 	);
 };

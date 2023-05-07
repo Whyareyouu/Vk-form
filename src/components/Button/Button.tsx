@@ -6,10 +6,11 @@ interface ButtonProps
 		ButtonHTMLAttributes<HTMLButtonElement>,
 		HTMLButtonElement
 	> {
-	variant?: 'primary' | 'error';
+	variant?: 'primary' | 'red';
 }
 
 export const Button = ({
+	disabled,
 	type,
 	onClick,
 	variant = 'primary',
@@ -19,7 +20,8 @@ export const Button = ({
 		<button
 			type={type}
 			onClick={onClick}
-			className={`${variant === 'primary' ? 'primary' : 'error'}`}>
+			className={`${variant === 'primary' ? 'primary' : 'red'}`}
+			disabled={disabled}>
 			{children}
 		</button>
 	);

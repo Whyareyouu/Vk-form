@@ -1,5 +1,6 @@
-import { TAction, TState } from "../../types/types";
-import { ActionPoints } from "./enums";
+import { TAction, TState } from '../../types/types';
+import { initialState } from '../context/context';
+import { ActionPoints } from './enums';
 
 export const reducer = (state: TState, action: TAction) => {
 	switch (action?.type) {
@@ -17,6 +18,8 @@ export const reducer = (state: TState, action: TAction) => {
 			return { ...state, date: { ...state.date, date: action.payload } };
 		case ActionPoints.COMMENT:
 			return { ...state, comment: action.payload };
+		case ActionPoints.CLEAR:
+			return initialState;
 		default:
 			return state;
 	}
