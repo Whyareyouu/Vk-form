@@ -4,6 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	padding: 20px;
 }
 .form__title {
 	font-weight: 500;
@@ -16,13 +17,13 @@
 }
 .office__body {
 	display: grid;
-	grid-template-columns: 400px 1fr;
-	grid-template-rows: auto minmax(300px, 400px);
+	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
 		'chosetime chosetime'
 		'calendar meetingrooms';
 	justify-items: start;
 	align-items: start;
+	gap: 10px 30px;
 }
 .office__body-chosetime {
 	grid-area: chosetime;
@@ -47,4 +48,34 @@
 .error {
 	font-size: 12px;
 	color: var(--red);
+}
+.office__body-adaptive {
+	display: none;
+}
+@media screen and (max-width: 1548px) {
+	.office__body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+}
+@media screen and (max-width: 600px) {
+	.book_meetingroom {
+		display: none;
+	}
+	.office__body-adaptive {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+@media screen and (max-width: 320px) {
+	.button__container {
+		flex-direction: column;
+		gap: 10px;
+	}
+	.button__container > button {
+		width: 100%;
+	}
 }

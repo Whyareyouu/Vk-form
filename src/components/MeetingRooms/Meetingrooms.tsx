@@ -3,7 +3,6 @@ import './Meetingrooms.css';
 import { Meetingroom } from '../Meetingroom/meetingroom';
 import { generateUniqueID } from '../../helpers/helpers';
 import { useFormDispatch } from '../../hooks/useFormDispatch';
-import { useFormState } from '../../hooks/useFormState';
 import { ActionPoints } from '../../ui/reducer/enums';
 interface MeetingroomsProps
 	extends React.DetailedHTMLProps<
@@ -11,10 +10,15 @@ interface MeetingroomsProps
 		HTMLDivElement
 	> {
 	error?: string;
+	selectedRoom: string;
 }
-const Meetingrooms = ({ className, error, ...props }: MeetingroomsProps) => {
+const Meetingrooms = ({
+	className,
+	error,
+	selectedRoom,
+	...props
+}: MeetingroomsProps) => {
 	const dispatch = useFormDispatch();
-	const state = useFormState();
 	const rooms = new Array(10).fill(<Meetingroom />).map((room, index) => ({
 		room: room,
 		id: generateUniqueID(),
@@ -30,8 +34,8 @@ const Meetingrooms = ({ className, error, ...props }: MeetingroomsProps) => {
 							dispatch({ type: ActionPoints.MEETINGROOM, payload: room.value })
 						}
 						key={room.id}
-						className={`${
-							room.value === state?.meetingroom ? 'active__room' : ''
+						className={`meetingroom__body ${
+							room.value === selectedRoom ? 'active__room' : ''
 						}`}>
 						<span>#{room.value}</span>
 						{room.room}

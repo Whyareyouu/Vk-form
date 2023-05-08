@@ -1,10 +1,9 @@
-import * as React from "react";
-import "./ChoseTime.css";
-import { CustomSelect } from "../CustomSelect/CustomSelect";
-import { TOption } from "../../types/types";
-import { useFormDispatch } from "../../hooks/useFormDispatch";
-import { ActionPoints } from "../../ui/reducer/enums";
-import { useFormState } from "../../hooks/useFormState";
+import * as React from 'react';
+import './ChoseTime.css';
+import { CustomSelect } from '../CustomSelect/CustomSelect';
+import { TOption } from '../../types/types';
+import { useFormDispatch } from '../../hooks/useFormDispatch';
+import { ActionPoints } from '../../ui/reducer/enums';
 interface ChoseTimeProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,
@@ -13,16 +12,19 @@ interface ChoseTimeProps
 	startTime: number;
 	endTime: number;
 	error?: string;
+	selectedStartTime: string;
+	selectedEndTime: string;
 }
 export const ChoseTime = ({
 	className,
+	selectedStartTime,
+	selectedEndTime,
 	startTime,
 	endTime,
 	error,
 	...props
 }: ChoseTimeProps) => {
 	const dispatch = useFormDispatch();
-	const state = useFormState();
 	const handleChangeStartTime = (selectedOption: TOption) => {
 		dispatch({ type: ActionPoints.STARTTIME, payload: selectedOption.value });
 	};
@@ -32,7 +34,7 @@ export const ChoseTime = ({
 	const times = React.useMemo(
 		() =>
 			Array(endTime - startTime)
-				.fill("")
+				.fill('')
 				.map((_, index) => ({
 					label: `${startTime + index}:00`,
 					value: `${startTime + index}:00`,
@@ -41,26 +43,22 @@ export const ChoseTime = ({
 	);
 	return (
 		<div className={`${className}`}>
-			<div className="DatePicker">
+			<div className='DatePicker'>
 				<CustomSelect
-					value={
-						times.find((time) => time.value === state.date.startTime) || null
-					}
+					value={times.find((time) => time.value === selectedStartTime) || null}
 					options={times}
-					placeholder="9:00"
+					placeholder='9:00'
 					onChange={handleChangeStartTime}
 				/>
 				<span>—</span>
 				<CustomSelect
-					value={
-						times.find((time) => time.value === state.date.endTime) || null
-					}
+					value={times.find((time) => time.value === selectedEndTime) || null}
 					options={times}
-					placeholder="21:00"
+					placeholder='21:00'
 					onChange={handleChangeEndTime}
 				/>
 			</div>
-			{error && <span className="error">{error}</span>}
+			{error && <span className='error'>{error}</span>}
 		</div>
 	);
 };

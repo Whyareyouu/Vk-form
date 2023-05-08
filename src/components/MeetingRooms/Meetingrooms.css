@@ -1,8 +1,7 @@
 .meetingrooms {
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: repeat(2, 1fr);
 	gap: 20px;
+	grid-template-columns: repeat(5, 1fr);
 	justify-content: center;
 	align-items: center;
 }
@@ -14,6 +13,16 @@
 	font-size: 22px;
 	line-height: 30px;
 }
+.meetingroom__body {
+	display: flex;
+	flex-direction: column;
+}
 .active__room svg {
 	fill: var(--primary);
+}
+@media screen and (max-width: 1200px) {
+	.meetingrooms {
+		display: flex;
+		flex-wrap: wrap;
+	}
 }

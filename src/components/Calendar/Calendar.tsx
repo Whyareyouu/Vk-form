@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import "./Calendar.css";
-import { formatDate, getDaysArray, weekdays } from "./helpers";
-import { useFormDispatch } from "../../hooks/useFormDispatch";
-import { ActionPoints } from "../../ui/reducer/enums";
-import { useFormState } from "../../hooks/useFormState";
+import React, { useState } from 'react';
+import './Calendar.css';
+import { formatDate, getDaysArray, weekdays } from './helpers';
+import { useFormDispatch } from '../../hooks/useFormDispatch';
+import { ActionPoints } from '../../ui/reducer/enums';
 
 interface CalendarProps
 	extends React.DetailedHTMLProps<
@@ -11,13 +10,18 @@ interface CalendarProps
 		HTMLDivElement
 	> {
 	error?: string;
+	selectedDate: string | Date;
 }
 
-const Calendar = ({ className, error, ...props }: CalendarProps) => {
+const Calendar = ({
+	className,
+	error,
+	selectedDate,
+	...props
+}: CalendarProps) => {
 	const dispatch = useFormDispatch();
-	const state = useFormState();
 	const [currentDate, setCurrentDate] = useState<Date>(new Date());
-	const [activeDate, setActiveDate] = useState<string | null>(null);
+	const [activeDate, setActiveDate] = useState<Date | null>(null);
 	const dateNow = new Date();
 	const days = getDaysArray(currentDate);
 	const prevMonth = () => {
@@ -31,8 +35,7 @@ const Calendar = ({ className, error, ...props }: CalendarProps) => {
 			(prevDate) => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1)
 		);
 	};
-
-	const handleDateClick = (day: Date, id: string): void => {
+	const handleDateClick = (day: Date): void => {
 		if (
 			(dateNow.getDate() > day.getDate() &&
 				dateNow.getMonth() >= day.getMonth()) ||
@@ -41,53 +44,54 @@ const Calendar = ({ className, error, ...props }: CalendarProps) => {
 		) {
 			return;
 		}
-		setActiveDate(id);
+		setActiveDate(day);
 		dispatch({ type: ActionPoints.DATE, payload: formatDate(day) });
 	};
-	if (
-		activeDate !== null &&
-		state.date.date !== new Date(activeDate).toISOString().substring(0, 10)
-	) {
+	if (activeDate !== null && selectedDate !== formatDate(activeDate)) {
 		setActiveDate(null);
 	}
 	return (
 		<div className={`${className}`}>
-			<div className="calendar">
-				<div className="header">
-					<div className="previous" onClick={prevMonth}>
-						{"<"}
+			<div className='calendar'>
+				<div className='header'>
+					<div className='previous' onClick={prevMonth}>
+						{'<'}
 					</div>
-					<div className="current-month">
-						{currentDate.toLocaleString("ru", {
-							month: "long",
-							year: "numeric",
+					<div className='current-month'>
+						{currentDate.toLocaleString('ru', {
+							month: 'long',
+							year: 'numeric',
 						})}
 					</div>
-					<div className="next" onClick={nextMonth}>
-						{">"}
+					<div className='next' onClick={nextMonth}>
+						{'>'}
 					</div>
 				</div>
-				<div className="weekdays">
+				<div className='weekdays'>
 					{weekdays.map((weekday) => (
-						<div className="weekday" key={weekday}>
+						<div className='weekday' key={weekday}>
 							{weekday}
 						</div>
 					))}
 				</div>
-				<div className="days">
+				<div className='days'>
 					{days.map((day) => (
 						<div
 							className={`day ${
-								day.getMonth() !== currentDate.getMonth() ? "other-month" : ""
-							}${activeDate === day.toISOString() ? "active" : ""}`}
+								day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''
+							}${
+								activeDate !== null && selectedDate === formatDate(day)
+									? 'active'
+									: ''
+							}`}
 							key={day.toISOString()}
-							onClick={() => handleDateClick(day, day.toISOString())}>
+							onClick={() => handleDateClick(day)}>
 							{day.getDate()}
 						</div>
 					))}
 				</div>
 			</div>
-			{error && <span className="error">{error}</span>}
+			{error && <span className='error'>{error}</span>}
 		</div>
 	);
 };

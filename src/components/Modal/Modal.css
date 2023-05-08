@@ -26,3 +26,19 @@
 .modal__content.modal__active {
 	transform: scale(1);
 }
+@media screen and (max-width: 900px) {
+	.modal {
+		align-items: start;
+	}
+}
+@media screen and (max-width: 900px) {
+	.modal__content {
+		overflow: scroll;
+		width: 80vw;
+	}
+}
+@media screen and (max-width: 600px) {
+	.modal {
+		display: none;
+	}
+}
