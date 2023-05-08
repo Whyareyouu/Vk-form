@@ -1,0 +1,9 @@
+.meetingroom__icon {
+	cursor: pointer;
+	width: 80px;
+	height: 80px;
+}
+
+.meetingroom__icon:hover {
+	fill: var(--primary-hover);
+}

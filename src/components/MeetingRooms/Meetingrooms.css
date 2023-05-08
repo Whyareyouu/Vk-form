@@ -1,0 +1,28 @@
+.meetingrooms {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(5, 1fr);
+	justify-content: center;
+	align-items: center;
+}
+.meetingrooms__title {
+	text-align: center;
+	color: var(--black);
+	margin-bottom: 15px;
+	font-weight: 500;
+	font-size: 22px;
+	line-height: 30px;
+}
+.meetingroom__body {
+	display: flex;
+	flex-direction: column;
+}
+.active__room svg {
+	fill: var(--primary);
+}
+@media screen and (max-width: 1200px) {
+	.meetingrooms {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}

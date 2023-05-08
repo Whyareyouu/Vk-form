@@ -1,0 +1,9 @@
+.DatePicker {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.DatePicker__element {
+	cursor: pointer;
+	padding: 5px;
+}
