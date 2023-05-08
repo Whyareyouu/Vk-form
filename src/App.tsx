@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TErrors, TOption } from './types/types';
-import './App.css';
+import './styles/App.css';
 import {
 	Button,
 	Modal,
