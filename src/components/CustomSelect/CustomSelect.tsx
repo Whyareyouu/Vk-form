@@ -1,6 +1,6 @@
-import * as React from "react";
-import Select from "react-select";
-import { TOption } from "../../types/types";
+import * as React from 'react';
+import Select from 'react-select';
+import { TOption } from '../../types/types';
 interface CustomSelectProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,
@@ -11,7 +11,7 @@ interface CustomSelectProps
 	error?: string;
 	value: TOption | null;
 }
-export const CustomSelect = ({
+const CustomSelect = ({
 	value,
 	options,
 	onChange,
@@ -27,7 +27,8 @@ export const CustomSelect = ({
 				onChange={onChange}
 				value={value}
 			/>
-			{error && <span className="error">{error}</span>}
+			{error && <span className='error'>{error}</span>}
 		</div>
 	);
 };
+export default CustomSelect;

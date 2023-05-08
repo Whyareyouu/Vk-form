@@ -1,6 +1,6 @@
 import './meetingroom.css';
 
-export const Meetingroom: React.FC<React.SVGProps<SVGSVGElement>> = () => {
+const Meetingroom: React.FC<React.SVGProps<SVGSVGElement>> = () => {
 	return (
 		<svg
 			className='meetingroom__icon'
@@ -27,3 +27,4 @@ export const Meetingroom: React.FC<React.SVGProps<SVGSVGElement>> = () => {
 		</svg>
 	);
 };
+export default Meetingroom;

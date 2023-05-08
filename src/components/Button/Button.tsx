@@ -8,8 +8,7 @@ interface ButtonProps
 	> {
 	variant?: 'primary' | 'red';
 }
-
-export const Button = ({
+const Button = ({
 	disabled,
 	type,
 	onClick,
@@ -26,3 +25,4 @@ export const Button = ({
 		</button>
 	);
 };
+export default Button;

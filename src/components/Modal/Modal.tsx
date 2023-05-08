@@ -6,11 +6,7 @@ interface ModalProps
 	setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Modal = ({
-	active,
-	setActive,
-	children,
-}: ModalProps): JSX.Element => {
+const Modal = ({ active, setActive, children }: ModalProps): JSX.Element => {
 	return (
 		<div
 			className={active ? 'modal modal__active' : 'modal'}
@@ -23,3 +19,4 @@ export const Modal = ({
 		</div>
 	);
 };
+export default Modal;

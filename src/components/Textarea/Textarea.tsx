@@ -9,7 +9,7 @@ export interface TextAreaProps
 	error?: string;
 }
 
-export const Textarea = ({
+const Textarea = ({
 	value,
 	onChange,
 	className,
@@ -28,3 +28,4 @@ export const Textarea = ({
 		</div>
 	);
 };
+export default Textarea;

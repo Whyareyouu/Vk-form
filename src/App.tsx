@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { TErrors, TOption } from './types/types';
 import './App.css';
-import { Button, Modal } from './components';
+import {
+	Button,
+	Modal,
+	Calendar,
+	ChoseTime,
+	Textarea,
+	CustomSelect,
+	MeetingRooms,
+} from './components';
 import { ActionPoints } from './ui/reducer/enums';
-import { CustomSelect } from './components/CustomSelect/CustomSelect';
 import { floors, meetingrooms_array, towers } from './helpers/options';
-import Calendar from './components/Calendar/Calendar';
-import ChoseTime from './components/ChoseTime/ChoseTime';
 import { useFormDispatch } from './hooks/useFormDispatch';
 import { useFormState } from './hooks/useFormState';
-import { Textarea } from './components/Textarea/Textarea';
-import Meetingrooms from './components/MeetingRooms/Meetingrooms';
 import { validator } from './ui/validator/validator';
 
 function App() {
@@ -80,7 +83,7 @@ function App() {
 						className='office__body-calendar'
 						error={errors?.date?.date}
 					/>
-					<Meetingrooms
+					<MeetingRooms
 						selectedRoom={state.meetingroom}
 						className='office__body-meetingrooms'
 						error={errors?.meetingroom}

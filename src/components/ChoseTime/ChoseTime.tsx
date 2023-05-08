@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './ChoseTime.css';
-import { CustomSelect } from '../CustomSelect/CustomSelect';
 import { TOption } from '../../types/types';
 import { useFormDispatch } from '../../hooks/useFormDispatch';
 import { ActionPoints } from '../../ui/reducer/enums';
+import CustomSelect from '../CustomSelect/CustomSelect';
 interface ChoseTimeProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,

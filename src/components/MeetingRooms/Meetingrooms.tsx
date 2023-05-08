@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './Meetingrooms.css';
-import { Meetingroom } from '../Meetingroom/meetingroom';
 import { generateUniqueID } from '../../helpers/helpers';
 import { useFormDispatch } from '../../hooks/useFormDispatch';
 import { ActionPoints } from '../../ui/reducer/enums';
+import Meetingroom from '../Meetingroom/meetingroom';
 interface MeetingroomsProps
 	extends React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLDivElement>,
